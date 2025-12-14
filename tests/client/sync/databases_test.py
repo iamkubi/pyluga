@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class DatabasesTest(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_databases(self, mock_api):
         expected = {
             'endpoint': 'client/servers/fds173/databases',
@@ -19,7 +19,7 @@ class DatabasesTest(unittest.TestCase):
         self.api.client.servers.databases.list_databases('fds173')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_databases_with_passwords(self, mock_api):
         expected = {
             'endpoint': 'client/servers/fds173/databases',
@@ -30,7 +30,7 @@ class DatabasesTest(unittest.TestCase):
                                                          include_passwords=True)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_database(self, mock_api):
         expected = {
             'endpoint': 'client/servers/fds173/databases',
@@ -40,7 +40,7 @@ class DatabasesTest(unittest.TestCase):
         self.api.client.servers.databases.create_database('fds173', 'testdb')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_database_with_remote(self, mock_api):
         expected = {
             'endpoint': 'client/servers/fds173/databases',
@@ -51,7 +51,7 @@ class DatabasesTest(unittest.TestCase):
                                                           '1.1.1.1')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rotate_database_password(self, mock_api):
         expected = {
             'endpoint': 'client/servers/fds173/databases/longlong/rotate'
@@ -62,7 +62,7 @@ class DatabasesTest(unittest.TestCase):
                                                                    'longlong')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_database(self, mock_api):
         expected = {
             'endpoint': 'client/servers/fds173/databases/longlong',

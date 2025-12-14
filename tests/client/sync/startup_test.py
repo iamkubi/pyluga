@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class StartupTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_variables(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/startup',
@@ -17,7 +17,7 @@ class StartupTests(unittest.TestCase):
         self.api.client.servers.startup.list_variables('srv123')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_update_variable(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/startup/variable',

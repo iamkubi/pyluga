@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class BackupsTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_backups(self, mock_api):
         expected = {
             'endpoint': 'client/servers/fds173/backups',
@@ -17,7 +17,7 @@ class BackupsTests(unittest.TestCase):
         self.api.client.servers.backups.list_backups('fds173')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_backup(self, mock_api):
         expected = {
             'endpoint': 'client/servers/abc123/backups',
@@ -26,7 +26,7 @@ class BackupsTests(unittest.TestCase):
         self.api.client.servers.backups.create_backup('abc123')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_backup_detail(self, mock_api):
         expected = {
             'endpoint': 'client/servers/abc123/backups/longid1111',
@@ -35,7 +35,7 @@ class BackupsTests(unittest.TestCase):
                                                           'longid1111')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_backup_download(self, mock_api):
         expected = {
             'endpoint': 'client/servers/abc123/backups/longid1111/download',
@@ -44,7 +44,7 @@ class BackupsTests(unittest.TestCase):
                                                             'longid1111')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_restore_backup(self, mock_api):
         expected = {
             'endpoint': 'client/servers/abc123/backups/longid1111/restore',
@@ -54,7 +54,7 @@ class BackupsTests(unittest.TestCase):
         self.api.client.servers.backups.restore_backup('abc123', 'longid1111')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_restore_backup_no_delete_existing_files(self, mock_api):
         expected = {
             'endpoint': 'client/servers/abc123/backups/longid1111/restore',
@@ -64,7 +64,7 @@ class BackupsTests(unittest.TestCase):
         self.api.client.servers.backups.restore_backup('abc123', 'longid1111', delete_existing_files=False)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_backup(self, mock_api):
         expected = {
             'endpoint': 'client/servers/abc123/backups/longid1111',

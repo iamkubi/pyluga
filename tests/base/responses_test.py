@@ -2,8 +2,8 @@ import unittest
 from copy import deepcopy
 from unittest import mock
 
-from pydactyl import PterodactylClient
-from pydactyl.responses import PaginatedResponse
+from pyluga import BelugaClient
+from pyluga.responses import PaginatedResponse
 
 TEST_META = {
     'pagination':
@@ -28,7 +28,7 @@ MULTIPAGE_TEST_DATA = [
 class PaginatedResponseTests(unittest.TestCase):
 
     def setUp(self):
-        self.client = PterodactylClient(url='dummy', api_key='dummy')
+        self.client = BelugaClient(url='dummy', api_key='dummy')
 
     def test_paginated_response_init(self):
         response = PaginatedResponse(self.client, 'anyendpoint', TEST_DATA)

@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class UsersTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_users(self, mock_api):
         expected = {
             'endpoint': 'client/servers/bofh44/users',
@@ -17,7 +17,7 @@ class UsersTests(unittest.TestCase):
         self.api.client.servers.users.list_users('bofh44')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_user(self, mock_api):
         expected = {
             'endpoint': 'client/servers/bofh44/users',
@@ -30,7 +30,7 @@ class UsersTests(unittest.TestCase):
             permissions=['control.console'], username='test')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_user(self, mock_api):
         expected = {
             'endpoint': 'client/servers/bofh44/users/longuuid',
@@ -38,7 +38,7 @@ class UsersTests(unittest.TestCase):
         self.api.client.servers.users.get_user('bofh44', 'longuuid')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_update_user(self, mock_api):
         expected = {
             'endpoint': 'client/servers/bofh44/users/longuuid',
@@ -49,7 +49,7 @@ class UsersTests(unittest.TestCase):
                                                   ['control.console'])
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_user(self, mock_api):
         expected = {
             'endpoint': 'client/servers/bofh44/users/longuuid',

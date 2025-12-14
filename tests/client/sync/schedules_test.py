@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class SchedulesTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_schedules(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules',
@@ -17,7 +17,7 @@ class SchedulesTests(unittest.TestCase):
         self.api.client.servers.schedules.list_schedules('srv123')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_schedule(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules',
@@ -31,7 +31,7 @@ class SchedulesTests(unittest.TestCase):
             'srv123', 'test', '*', '1', 'pants', 'doggo', 'may')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_schedule_details(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules/3',
@@ -39,7 +39,7 @@ class SchedulesTests(unittest.TestCase):
         self.api.client.servers.schedules.get_schedule_details('srv123', 3)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_update_schedule(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules/4',
@@ -53,7 +53,7 @@ class SchedulesTests(unittest.TestCase):
             'srv123', 4, 'test', '*', '1', 'pants', 'doggo', 'may')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_schedule(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules/5',
@@ -62,7 +62,7 @@ class SchedulesTests(unittest.TestCase):
         self.api.client.servers.schedules.delete_schedule('srv123', 5)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_task(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules/5/tasks',
@@ -74,7 +74,7 @@ class SchedulesTests(unittest.TestCase):
                                                       'say Hello World', '6')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_update_task(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules/5/tasks/4',
@@ -87,7 +87,7 @@ class SchedulesTests(unittest.TestCase):
                                                       True)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_task(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules/5/tasks/4',
@@ -96,7 +96,7 @@ class SchedulesTests(unittest.TestCase):
         self.api.client.servers.schedules.delete_task('srv123', 5, 4)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_run_schedule(self, mock_api):
         expected = {
             'endpoint': 'client/servers/srv123/schedules/7/execute',

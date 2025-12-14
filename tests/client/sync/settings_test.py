@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class SettingsTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rename_server(self, mock_api):
         expected = {
             'endpoint': 'client/servers/f1d2s3/settings/rename',
@@ -19,7 +19,7 @@ class SettingsTests(unittest.TestCase):
         self.api.client.servers.settings.rename_server('f1d2s3', 'newname')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rename_server_with_description(self, mock_api):
         expected = {
             'endpoint': 'client/servers/f1d2s3/settings/rename',
@@ -29,7 +29,7 @@ class SettingsTests(unittest.TestCase):
         self.api.client.servers.settings.rename_server('f1d2s3', 'newname', 'newdescription')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rename_server_no_description(self, mock_api):
         expected = {
             'endpoint': 'client/servers/f1d2s3/settings/rename',
@@ -39,7 +39,7 @@ class SettingsTests(unittest.TestCase):
         self.api.client.servers.settings.rename_server('f1d2s3', 'newname')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rename_server_clear_description(self, mock_api):
         expected = {
             'endpoint': 'client/servers/f1d2s3/settings/rename',
@@ -49,7 +49,7 @@ class SettingsTests(unittest.TestCase):
         self.api.client.servers.settings.rename_server('f1d2s3', 'newname', '')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_reinstall_server(self, mock_api):
         expected = {
             'endpoint': 'client/servers/f1d2s3/settings/reinstall',

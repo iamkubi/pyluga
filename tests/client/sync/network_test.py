@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class NetworkTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_allocations(self, mock_api):
         expected = {
             'endpoint': 'client/servers/notwork/network/allocations',
@@ -17,7 +17,7 @@ class NetworkTests(unittest.TestCase):
         self.api.client.servers.network.list_allocations('notwork')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_assign_allocation(self, mock_api):
         expected = {
             'endpoint': 'client/servers/notwork/network/allocations',
@@ -26,7 +26,7 @@ class NetworkTests(unittest.TestCase):
         self.api.client.servers.network.assign_allocation('notwork')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_set_allocation_note(self, mock_api):
         expected = {
             'endpoint': 'client/servers/notwork/network/allocations/2',
@@ -37,7 +37,7 @@ class NetworkTests(unittest.TestCase):
                                                             'some note')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_set_primary_allocation(self, mock_api):
         expected = {
             'endpoint': 'client/servers/notwork/network/allocations/33/primary',
@@ -46,7 +46,7 @@ class NetworkTests(unittest.TestCase):
         self.api.client.servers.network.set_primary_allocation('notwork', 33)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_unassign_allocation(self, mock_api):
         expected = {
             'endpoint': 'client/servers/notwork/network/allocations/44',

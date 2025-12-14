@@ -19,12 +19,12 @@ sys.path.insert(0, os.path.abspath('..'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'pydactyl'
+project = 'pyluga'
 copyright = '2021, Ryan Kubiak'
 author = 'Ryan Kubiak'
 
 # The full version, including alpha/beta/rc tags
-with open("../pydactyl/constants.py") as fh:
+with open("../pyluga/constants.py") as fh:
     VERSION = re.search('__version__ = \'([^\']+)\'', fh.read()).group(1)
 
 release = VERSION
@@ -74,7 +74,7 @@ def autodoc_remove_class_signatures(app, what, name, obj, options, signature,
                            return_annotation):
     if what == "class":
         # Removes the call signature for Classes since most inherit from
-        # PterodactylAPI.  Classes are only instantiated by PterodactylClient.
+        # BelugaAPI.  Classes are only instantiated by BelugaClient.
         return (None, None)
 
 def setup(app):

@@ -4,25 +4,25 @@
 
 locations
 =========
-.. automodule:: pydactyl.api.locations
+.. automodule:: pyluga.api.locations
     :members:
 
 nests
 =====
-.. automodule:: pydactyl.api.nests
+.. automodule:: pyluga.api.nests
     :members:
 
 nodes
 =====
-.. automodule:: pydactyl.api.nodes
+.. automodule:: pyluga.api.nodes
     :members:
 
 servers
 =======
-.. automodule:: pydactyl.api.servers
+.. automodule:: pyluga.api.servers
     :members:
 
 user
 ====
-.. automodule:: pydactyl.api.user
+.. automodule:: pyluga.api.user
     :members:

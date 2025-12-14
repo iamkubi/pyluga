@@ -1,15 +1,15 @@
 from unittest import main, mock, TestCase
 
-from pydactyl import PterodactylClient
-from pydactyl.exceptions import BadRequestError
+from pyluga import BelugaClient
+from pyluga.exceptions import BadRequestError
 
 
 class LocationsTests(TestCase):
 
     def setUp(self):
-        self.client = PterodactylClient(url='dummy', api_key='dummy')
+        self.client = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_locations(self, mock_api):
         expected = {
             'endpoint': 'application/locations',
@@ -19,7 +19,7 @@ class LocationsTests(TestCase):
         self.client.locations.list_locations()
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_location_info(self, mock_api):
         expected = {
             'endpoint': 'application/locations/11',
@@ -29,7 +29,7 @@ class LocationsTests(TestCase):
         self.client.locations.get_location_info(11)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_location(self, mock_api):
         expected = {
             'endpoint': 'application/locations',
@@ -44,7 +44,7 @@ class LocationsTests(TestCase):
         with self.assertRaises(BadRequestError):
             self.client.locations.edit_location(5)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_edit_location(self, mock_api):
         expected = {
             'endpoint': 'application/locations/33',
@@ -56,7 +56,7 @@ class LocationsTests(TestCase):
                                             description='Level3 NYC Server')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_location(self, mock_api):
         expected = {
             'endpoint': 'application/locations/44',

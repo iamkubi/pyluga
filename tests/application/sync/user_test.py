@@ -1,15 +1,15 @@
 from unittest import main, mock, TestCase
 
-from pydactyl import PterodactylClient
-from pydactyl.exceptions import BadRequestError
+from pyluga import BelugaClient
+from pyluga.exceptions import BadRequestError
 
 
 class UserTests(TestCase):
 
     def setUp(self):
-        self.client = PterodactylClient(url='dummy', api_key='dummy')
+        self.client = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_users(self, mock_api):
         expected = {
             'endpoint': 'application/users',
@@ -19,7 +19,7 @@ class UserTests(TestCase):
         self.client.user.list_users()
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_users_with_filter(self, mock_api):
         expected = {
             'endpoint': 'application/users',
@@ -29,7 +29,7 @@ class UserTests(TestCase):
         self.client.user.list_users(email='best@test.com')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_users_with_multiple_filter_params(self, mock_api):
         expected = {
             'endpoint': 'application/users',
@@ -43,7 +43,7 @@ class UserTests(TestCase):
                                     username='best', external_id=4)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_users_with_multiple_filter_params_and_includes(
             self, mock_api):
         expected = {
@@ -58,7 +58,7 @@ class UserTests(TestCase):
             includes=['servers', 'databases'])
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_users_with_one_param_no_filters(
             self, mock_api):
         expected = {
@@ -69,7 +69,7 @@ class UserTests(TestCase):
         self.client.user.list_users(params={'per_page': 300})
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_user_info_by_external_id(self, mock_api):
         expected = {
             'endpoint': 'application/users/external/11',
@@ -79,7 +79,7 @@ class UserTests(TestCase):
         self.client.user.get_user_info(external_id=11)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_user_info_by_user_id(self, mock_api):
         expected = {
             'endpoint': 'application/users/22',
@@ -97,7 +97,7 @@ class UserTests(TestCase):
         with self.assertRaises(BadRequestError):
             self.client.user.get_user_info(user_id=1, external_id=2)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_user_with_user_id(self, mock_api):
         expected = {
             'endpoint': 'application/users/77',
@@ -106,7 +106,7 @@ class UserTests(TestCase):
         self.client.user.delete_user(user_id=77)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_user_with_external_id(self, mock_api):
         mock_api.return_value = {'attributes': {'id': 88}}
         expected = [mock.call(endpoint='application/users/external/11'),
@@ -122,7 +122,7 @@ class UserTests(TestCase):
         with self.assertRaises(BadRequestError):
             self.client.user.delete_user(user_id=1, external_id=2)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_user(self, mock_api):
         expected = {
             'endpoint': 'application/users',
@@ -139,7 +139,7 @@ class UserTests(TestCase):
             root_admin=True, language='en')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_edit_user(self, mock_api):
         expected = {
             'endpoint': 'application/users/11',

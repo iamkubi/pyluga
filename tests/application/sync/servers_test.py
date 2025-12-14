@@ -1,15 +1,15 @@
 from unittest import main, mock, TestCase
 
-from pydactyl import PterodactylClient
-from pydactyl.exceptions import BadRequestError
+from pyluga import BelugaClient
+from pyluga.exceptions import BadRequestError
 
 
 class ServersTests(TestCase):
 
     def setUp(self):
-        self.client = PterodactylClient(url='dummy', api_key='dummy')
+        self.client = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_servers(self, mock_api):
         expected = {
             'endpoint': 'application/servers',
@@ -19,7 +19,7 @@ class ServersTests(TestCase):
         self.client.servers.list_servers()
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_server_info_by_external_id(self, mock_api):
         expected = {
             'endpoint': 'application/servers/external/11',
@@ -29,7 +29,7 @@ class ServersTests(TestCase):
         self.client.servers.get_server_info(external_id=11)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_server_info_by_server_id(self, mock_api):
         expected = {
             'endpoint': 'application/servers/22',
@@ -47,7 +47,7 @@ class ServersTests(TestCase):
         with self.assertRaises(BadRequestError):
             self.client.servers.get_server_info(server_id=1, external_id=2)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_suspend_server(self, mock_api):
         expected = {
             'endpoint': 'application/servers/33/suspend',
@@ -56,7 +56,7 @@ class ServersTests(TestCase):
         self.client.servers.suspend_server(server_id=33)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_unsuspend_server(self, mock_api):
         expected = {
             'endpoint': 'application/servers/44/unsuspend',
@@ -65,7 +65,7 @@ class ServersTests(TestCase):
         self.client.servers.unsuspend_server(server_id=44)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_reinstall_server(self, mock_api):
         expected = {
             'endpoint': 'application/servers/55/reinstall',
@@ -74,7 +74,7 @@ class ServersTests(TestCase):
         self.client.servers.reinstall_server(server_id=55)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rebuild_server(self, mock_api):
         expected = {
             'endpoint': 'application/servers/66/rebuild',
@@ -83,7 +83,7 @@ class ServersTests(TestCase):
         self.client.servers.rebuild_server(server_id=66)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_server(self, mock_api):
         expected = {
             'endpoint': 'application/servers/77',
@@ -92,7 +92,7 @@ class ServersTests(TestCase):
         self.client.servers.delete_server(server_id=77)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_force_delete_server(self, mock_api):
         expected = {
             'endpoint': 'application/servers/88/force',
@@ -101,7 +101,7 @@ class ServersTests(TestCase):
         self.client.servers.delete_server(server_id=88, force=True)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_server_databases(self, mock_api):
         expected = {
             'endpoint': 'application/servers/99/databases',
@@ -111,7 +111,7 @@ class ServersTests(TestCase):
         self.client.servers.list_server_databases(server_id=99)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_server_database_info(self, mock_api):
         expected = {
             'endpoint': 'application/servers/111/databases/5',
@@ -122,7 +122,7 @@ class ServersTests(TestCase):
                                                      database_id=5)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_server_database(self, mock_api):
         expected = {
             'endpoint': 'application/servers/222/databases',
@@ -131,7 +131,7 @@ class ServersTests(TestCase):
         self.client.servers.create_server_database(server_id=222)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_server_database(self, mock_api):
         expected = {
             'endpoint': 'application/servers/333/databases/6',
@@ -140,7 +140,7 @@ class ServersTests(TestCase):
         self.client.servers.delete_server_database(server_id=333, database_id=6)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_reset_server_database_password(self, mock_api):
         expected = {
             'endpoint': 'application/servers/333/databases/6/reset-password',
@@ -154,19 +154,19 @@ class ServersTests(TestCase):
         with self.assertRaisesRegex(BadRequestError, 'default_allocation'):
             self.client.servers.create_server('test server', 1, 1, 1, 0, 0, 0)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_server_with_location(self, mock_api):
         self.client.servers.create_server('test server', 1, 2, 3, 4, 5, 6,
                                           location_ids=[7])
         mock_api.assert_called()
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_server_with_allocation(self, mock_api):
         self.client.servers.create_server('test server', 1, 2, 3, 4, 5, 6,
                                           default_allocation=1234)
         mock_api.assert_called()
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_update_server_build(self, mock_api):
         expected = {
             'endpoint': 'application/servers/42/build',
@@ -189,7 +189,7 @@ class ServersTests(TestCase):
             remove_allocations=88, oom_disabled=True)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_update_server_startup(self, mock_api):
         expected = {
             'endpoint': 'application/servers/11/startup',

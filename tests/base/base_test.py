@@ -3,14 +3,14 @@ from unittest import mock
 
 from requests import Session
 
-from pydactyl.api import base
-from pydactyl.exceptions import BadRequestError
+from pyluga.api import base
+from pyluga.exceptions import BadRequestError
 
 
 class BaseTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = base.PterodactylAPI(url='https://dummy.com',
+        self.api = base.BelugaAPI(url='https://dummy.com',
                                        api_key='dummy_key')
 
     def test_init(self):

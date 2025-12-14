@@ -1,12 +1,12 @@
 import unittest
 from unittest import mock
 import asyncio
-from pydactyl.async_api_client import AsyncPterodactylClient
+from pyluga.async_api_client import AsyncBelugaClient
 
 class AsyncUsersTests(unittest.TestCase):
 
     def setUp(self):
-        self.api = AsyncPterodactylClient(url='https://dummy.com', api_key='dummy')
+        self.api = AsyncBelugaClient(url='https://dummy.com', api_key='dummy')
 
     def test_list_users(self):
         async def run_test():

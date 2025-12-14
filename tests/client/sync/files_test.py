@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class FilesTest(unittest.TestCase):
 
     def setUp(self):
-        self.api = PterodactylClient(url='dummy', api_key='dummy')
+        self.api = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_files(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/list',
@@ -18,7 +18,7 @@ class FilesTest(unittest.TestCase):
         self.api.client.servers.files.list_files('gudsrvr')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_files_with_path(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/list',
@@ -27,7 +27,7 @@ class FilesTest(unittest.TestCase):
         self.api.client.servers.files.list_files('gudsrvr', 'saves/backups/')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_download_file(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/download',
@@ -37,7 +37,7 @@ class FilesTest(unittest.TestCase):
                                                     'backups/today.zip')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_file_contents(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/contents',
@@ -48,7 +48,7 @@ class FilesTest(unittest.TestCase):
                                                         'backups/today.zip')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rename_file(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/rename',
@@ -60,7 +60,7 @@ class FilesTest(unittest.TestCase):
                                                   'new.txt')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_rename_file_with_root(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/rename',
@@ -72,7 +72,7 @@ class FilesTest(unittest.TestCase):
                                                   'yesterday.zip', 'backups')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_copy_file(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/copy',
@@ -82,7 +82,7 @@ class FilesTest(unittest.TestCase):
         self.api.client.servers.files.copy_file('gudsrvr', 'config.json')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_write_file(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/write',
@@ -96,7 +96,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', 'eula.txt', 'All your base are belong to us')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_compress_files(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/compress',
@@ -107,7 +107,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', ['game.map', 'game.save'])
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_compress_files_with_path(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/compress',
@@ -119,7 +119,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', ['today.zip', 'yesterday.zip'], 'backups')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_decompress_files(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/decompress',
@@ -130,7 +130,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', 'backup.tar.gz')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_decompress_files_with_path(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/decompress',
@@ -141,7 +141,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', 'backup.tar.gz', 'gamefiles')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_files(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/delete',
@@ -152,7 +152,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', ['oldbackup.zip', 'oldconfig.txt'])
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_files_with_path(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/delete',
@@ -163,7 +163,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', ['save1', 'save2'], 'savegames')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_folder(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/create-folder',
@@ -174,7 +174,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', 'folders_and_dirs_are_not_the_same')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_folder_with_path(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/create-folder',
@@ -185,7 +185,7 @@ class FilesTest(unittest.TestCase):
             'gudsrvr', 'archived', 'backups')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_upload_file_url(self, mock_api):
         expected = {
             'endpoint': 'client/servers/gudsrvr/files/upload',

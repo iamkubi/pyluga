@@ -1,15 +1,15 @@
 import unittest
 from unittest import mock
 import asyncio
-from pydactyl.responses import PaginatedResponse
-from pydactyl.async_api_client import AsyncPterodactylClient
+from pyluga.responses import PaginatedResponse
+from pyluga.async_api_client import AsyncBelugaClient
 
 class AsyncPaginationTests(unittest.TestCase):
 
     def test_async_iteration(self):
         async def run_test():
             # Mock client and api_request
-            client = mock.Mock(spec=AsyncPterodactylClient)
+            client = mock.Mock(spec=AsyncBelugaClient)
             # api_request must return a coroutine
             client._api_request = mock.AsyncMock()
             
@@ -51,7 +51,7 @@ class AsyncPaginationTests(unittest.TestCase):
 
     def test_collect_async(self):
         async def run_test():
-            client = mock.Mock(spec=AsyncPterodactylClient)
+            client = mock.Mock(spec=AsyncBelugaClient)
             client._api_request = mock.AsyncMock()
             
             data = {

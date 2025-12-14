@@ -1,14 +1,14 @@
 from unittest import main, mock, TestCase
 
-from pydactyl import PterodactylClient
+from pyluga import BelugaClient
 
 
 class NodesTests(TestCase):
 
     def setUp(self):
-        self.client = PterodactylClient(url='dummy', api_key='dummy')
+        self.client = BelugaClient(url='dummy', api_key='dummy')
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_nodes(self, mock_api):
         expected = {
             'endpoint': 'application/nodes',
@@ -18,7 +18,7 @@ class NodesTests(TestCase):
         self.client.nodes.list_nodes()
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_node_details(self, mock_api):
         expected = {
             'endpoint': 'application/nodes/11',
@@ -28,7 +28,7 @@ class NodesTests(TestCase):
         self.client.nodes.get_node_details(11)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_get_node_config(self, mock_api):
         expected = {
             'endpoint': 'application/nodes/111/configuration',
@@ -36,7 +36,7 @@ class NodesTests(TestCase):
         self.client.nodes.get_node_config(111)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_node(self, mock_api):
         expected_data = {
             'name': 'Test-Name 1_2.3',
@@ -69,7 +69,7 @@ class NodesTests(TestCase):
 
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_edit_node(self, mock_api):
         expected_data = {
             'name': 'nodey node',
@@ -100,7 +100,7 @@ class NodesTests(TestCase):
 
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_list_node_allocations(self, mock_api):
         expected = {
             'endpoint': 'application/nodes/12/allocations',
@@ -110,7 +110,7 @@ class NodesTests(TestCase):
         self.client.nodes.list_node_allocations(12)
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_allocation_single(self, mock_api):
         expected = {
             'endpoint': 'application/nodes/13/allocations',
@@ -122,7 +122,7 @@ class NodesTests(TestCase):
                                              '1.2.3.4')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_allocation_multiple(self, mock_api):
         expected = {
             'endpoint': 'application/nodes/14/allocations',
@@ -135,7 +135,7 @@ class NodesTests(TestCase):
                                              '1.2.3.4')
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_create_allocation_without_alias(self, mock_api):
         expected = {
             'endpoint': 'application/nodes/15/allocations',
@@ -147,7 +147,7 @@ class NodesTests(TestCase):
             15, '1.2.3.4', ['5001'])
         mock_api.assert_called_with(**expected)
 
-    @mock.patch('pydactyl.api.base.PterodactylAPI._api_request')
+    @mock.patch('pyluga.api.base.BelugaAPI._api_request')
     def test_delete_allocation(self, mock_api):
         expected = {
             'endpoint': 'application/nodes/16/allocations/123',
